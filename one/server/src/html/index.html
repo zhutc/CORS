@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTTPCORS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1> this is index.html </h1>
+    <script type="text/javascript">
+        var index = 0
+function corsRequest(){
+    var request = new XMLHttpRequest()
+    request.onreadystatechange = function(){
+        if(request.DONE && request.status == 200 && request.readyState == 4) {
+            var responseText = request.responseText
+            console.log('response = ' , responseText)
+            updateText(responseText)
+        }
+    }
+    request.open('GET','http://localhost:3001/',true)
+    request.send()
+
+}
+
+function updateText(text){
+    var root = document.getElementById('root')
+    ++index
+    var text = "[ " + index.toString() + " ] : " + text 
+    root.innerHTML =  text
+}
+    </script>
+    <div>
+        <button onclick="corsRequest()">CORS请求</button>
+    </div>
+    <div id="root">
+
+    </div>
+</body>
+</html>
